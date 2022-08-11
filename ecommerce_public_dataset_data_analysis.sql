@@ -192,7 +192,7 @@ FROM
         year(order_purchase_timestamp) AS year,
         product_category_name_english,
         ROUND(AVG(TIMESTAMPDIFF(DAY, order_purchase_timestamp, order_estimated_delivery_date)),1) AS avg_order_to_est_delivery_date_yearly,
-             ROW_NUMBER() OVER (PARTITION BY year(order_purchase_timestamp) order by year(order_purchase_timestamp),
+             ROW_NUMBER() OVER (PARTITION BY YEAR(order_purchase_timestamp) ORDER BY YEAR(order_purchase_timestamp),
                           ROUND(AVG(TIMESTAMPDIFF(DAY, order_purchase_timestamp, order_estimated_delivery_date)),1) DESC 
                           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS row_num
       FROM 
